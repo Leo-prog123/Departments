@@ -8,7 +8,7 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 # Первая работа
 
 def main():
-    db_session.global_init("db/mars_explorer.db")
+    db_session.global_init("db/mars_explorer_.db")
     session = db_session.create_session()
 
     job = Jobs()

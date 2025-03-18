@@ -6,6 +6,8 @@ from sqlalchemy import orm
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
+
+
 class User(SqlAlchemyBase, UserMixin):
     __tablename__ = 'users'
 

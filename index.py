@@ -188,7 +188,7 @@ def edit_department(id):
     form = DepartmentForm()
     if request.method == "GET":
         db_sess = db_session.create_session()
-        departments = db_sess.query(Department).filter(Department.id == id, (current_user.id == 1)).first()
+        departments = db_sess.query(Department).filter(Department.id == id,(current_user.id == Department.chief)).first()
         if departments:
             form.title.data = departments.title
             form.members.data = departments.members
@@ -197,7 +197,7 @@ def edit_department(id):
             abort(404)
     if form.validate_on_submit():
         db_sess = db_session.create_session()
-        departments = db_sess.query(Department).filter(Department.id == id, (current_user.id == 1)).first()
+        departments = db_sess.query(Department).filter(Department.id == id, (current_user.id == Department.chief)).first()
         if departments:
             departments.title = form.title.data
             departments.members = form.members.data
@@ -213,7 +213,7 @@ def edit_department(id):
 @login_required
 def department_delete(id):
     db_sess = db_session.create_session()
-    department = db_sess.query(Jobs).filter(Department.id == id, Department.id == 1).first()
+    department = db_sess.query(Department).filter(Department.id == id, (current_user.id == Department.chief)).first()
     if department:
         db_sess.delete(department)
         db_sess.commit()
